@@ -1,5 +1,5 @@
-# The SINPA dataset and DeepPA method
-This repo is the implementation of our IJICAI 2024 paper (AI for Social Good Track) entitled [Predicting Carpark Availability in Singapore with Cross-Domain Data: A New Dataset and A Data-Driven Approach](https://www.baidu.com/).
+# SINPA
+This repo is the implementation of our IJCAI 2024 paper (AI for Social Good Track) entitled [Predicting Carpark Availability in Singapore with Cross-Domain Data: A New Dataset and A Data-Driven Approach](https://arxiv.org/pdf/2405.18910).
 In this study, we crawl, process, and release the <b>SINPA</b> dataset, a large-scale parking availability dataset incorporating cross-domain data in Singapore. We then propose a novel deep-learning framework <b>DeepPA</b> to collectively forecast future PA readings across Singapore. 
 
 
