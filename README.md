@@ -189,11 +189,10 @@ The <b>SINPA</b> dataset is released under the Singapore Open Data Licence: [htt
 ## Citation
 If you find our work useful in your research, please cite:
 ```
-@article{zhang2024predicting,
+@inproceedings{zhang2024predicting,
   title={Predicting Parking Availability in Singapore with Cross-Domain Data: A New Dataset and A Data-Driven Approach},
   author={Zhang, Huaiwu and Xia, Yutong and Zhong, Siru and Wang, Kun and Tong, Zekun and Wen, Qingsong and Zimmermann, Roger and Liang, Yuxuan},
-  journal={arXiv preprint arXiv:2405.18910},
+  booktitle={Proceedings of the Thirty-third International Joint Conference on Artificial Intelligence, IJCAI-24},
   year={2024}
 }
-
 ```
