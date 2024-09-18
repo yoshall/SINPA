@@ -101,7 +101,7 @@ In this section, we will outline the procedure for downloading the SINPA dataset
   
   Note: _Normalized_ refers to Z-score normalization, which is applied for fast convergence.
 
-
+- **Auxiliary Data**. If you would like to visualize the parking lots or customize the adjacency matrix, you can access the parking lot locations in the file `aux_data/lots_location.csv`.
 
 ## Requirements
 DeepPA uses the following dependencies:
