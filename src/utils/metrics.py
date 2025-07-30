@@ -4,11 +4,6 @@ import pandas as pd
 import os
 
 
-occup = np.load("data/prob_full_occupy.npy")
-occup_mask = (occup > 0.1).astype(int).reshape(1, 1, -1, 1)
-occup_mask = torch.Tensor(occup_mask)
-
-
 def masked_mse(preds, labels, null_val=np.nan, mask=None):
     """
     Calculates the mean squared error (MSE) between the predicted values and the labels,
@@ -135,39 +130,3 @@ def compute_all_metrics(pred, real, null_value=np.nan):
     mae = masked_mae(pred, real, null_value).item()
     rmse = masked_rmse(pred, real, null_value).item()
     return mae, rmse
-
-
-def masked_acc(preds, labels, null_val=np.nan, mask=None, threshould=0.01):
-    """
-    Calculates the masked accuracy between predicted values and ground truth labels.
-
-    Args:
-        preds (torch.Tensor): Predicted values.
-        labels (torch.Tensor): Ground truth labels.
-        null_val (float, optional): Value to be considered as null. Defaults to np.nan.
-        mask (torch.Tensor, optional): Mask indicating which values to consider. Defaults to None.
-        threshould (float, optional): Threshold value for numerical errors. Defaults to 0.01.
-
-    Returns:
-        torch.Tensor: Masked accuracy.
-
-    """
-    if mask == None:
-        if np.isnan(null_val):
-            mask = ~torch.isnan(labels)
-        else:
-            mask = labels > null_val + 0.1  # +0.1 for potential numerical errors
-
-    mask = occup_mask * mask
-
-    mask = mask.float()
-    mask /= torch.mean((mask))
-    mask = torch.where(torch.isnan(mask), torch.zeros_like(mask), mask)
-
-    preds = preds.int() > 0  # int for values like -0.001
-    labels = labels.int() > 0  # int for values like -0.001
-
-    loss = (preds == labels).int()
-    loss = loss * mask
-    loss = torch.where(torch.isnan(loss), torch.zeros_like(loss), loss)
-    return torch.mean(loss)
