@@ -1,15 +1,25 @@
-# SINPA
+# SINPA and DeepPA
 
 This repo is the implementation of our IJCAI 2024 paper (AI for Social Good Track) entitled [Predicting Carpark Availability in Singapore with Cross-Domain Data: A New Dataset and A Data-Driven Approach](https://arxiv.org/pdf/2405.18910).
-In this study, we crawl, process, and release the <b>SINPA</b> dataset, a large-scale parking availability dataset incorporating cross-domain data in Singapore. We then propose a novel deep-learning framework <b>DeepPA</b> to collectively forecast future PA readings across Singapore.
+In this study, we crawl, process, and release the **SINPA** dataset, a large-scale parking availability dataset incorporating cross-domain data in Singapore. We then propose a novel deep-learning framework **DeepPA** to collectively forecast future PA readings across Singapore.
 
-## Framework
+## Framework Overview
 
 <img src="img/intro and model.png" width="1000px">
 
-Figure (a) Distribution of 1,687 carparks throughout Singapore. (b) The framework of DeepPA.
+Figure (a) Distribution of 1,687 carparks throughout Singapore. (b) The framework of DeepPA, our proposed predictive architecture.
 
-## Dataset
+## Live Demo System
+
+<a href="https://sinpa.netlify.app" target="_blank">
+    <img src="./img/sinpa_demo.gif" width="600"/>
+  </a>
+
+🔗 Try it here: [https://sinpa.netlify.app](https://sinpa.netlify.app)
+
+The interactive demo system is built on the Mapbox platform. It allows users to select a parking location and visualize both predicted and actual parking availability.
+
+## Dataset Description
 
 In this section, we will outline the procedure for downloading the SINPA dataset, followed by a detailed description of the dataset.
 
@@ -105,29 +115,29 @@ In this section, we will outline the procedure for downloading the SINPA dataset
   Note: _Normalized_ refers to Z-score normalization, which is applied for fast convergence.
 - **Auxiliary Data**. If you would like to visualize the parking lots or customize the adjacency matrix, you can access the parking lot locations in the file `aux_data/lots_location.csv`.
 
-## Step-by-Step Setup Guide
+## Step-by-Step Guide for Running DeepPA
 
-### 1. Clone the Repository
+### Clone the Repository
 
 ```bash
 git clone git@github.com:yoshall/SINPA.git
 cd SINPA
 ```
 
-### 2. Create and Activate a New Environment
+### Create and Activate a New Environment
 
 ```bash
 conda create -n sinpa python=3.9 -y
 conda activate sinpa
 ```
 
-### 3. Install Dependencies
+### Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4. Prepare the Dataset
+### Prepare the Dataset
 
 Put the dataset you have download from [huggingface](https://huggingface.co/datasets/Huaiwu/SINPA/tree/main) is placed in the following structure:
 
@@ -139,7 +149,7 @@ Put the dataset you have download from [huggingface](https://huggingface.co/data
     └── 📄 test.npz
 ```
 
-### 5. (Optional) Weights & Biases
+### (Optional) Weights & Biases
 
 If you want to enable [Weights & Biases]() logging:
 
@@ -147,7 +157,7 @@ If you want to enable [Weights & Biases]() logging:
 wandb login
 ```
 
-### 6. Model Training
+### Model Training
 
 The following examples are conducted on the base dataset of SINPA:
 
@@ -169,7 +179,7 @@ python ./experiments/DeepPA/main.py --dataset SINPA --mode train --gpu 0 --GCO F
 python ./experiments/DeepPA/main.py --dataset SINPA --mode train --gpu 0 --GCO_Thre 0.7
 ```
 
-### 7. Model Evaluation
+### Model Evaluation
 
 To test the above-trained models, you can use the following command:
 

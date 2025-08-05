@@ -41,7 +41,7 @@ def get_public_config():
 
     # data
     parser.add_argument("--dataset", type=str, default="base")
-    parser.add_argument("--batch_size", type=int, default=8)
+    parser.add_argument("--batch_size", type=int, default=128)
     parser.add_argument("--aug", type=float, default=1.0)
     parser.add_argument("--seq_len", type=int, default=12)
     parser.add_argument("--horizon", type=int, default=12)
