@@ -1,0 +1,28 @@
+2025-08-05 08:27:37,297 INFO    MainThread:2657691 [wandb_setup.py:_flush():76] Current SDK version is 0.16.6
+2025-08-05 08:27:37,297 INFO    MainThread:2657691 [wandb_setup.py:_flush():76] Configure stats pid to 2657691
+2025-08-05 08:27:37,297 INFO    MainThread:2657691 [wandb_setup.py:_flush():76] Loading settings from /home/v-yutongxia/.config/wandb/settings
+2025-08-05 08:27:37,297 INFO    MainThread:2657691 [wandb_setup.py:_flush():76] Loading settings from /home/v-yutongxia/SINPA/wandb/settings
+2025-08-05 08:27:37,297 INFO    MainThread:2657691 [wandb_setup.py:_flush():76] Loading settings from environment variables: {}
+2025-08-05 08:27:37,297 INFO    MainThread:2657691 [wandb_setup.py:_flush():76] Applying setup settings: {'_disable_service': False}
+2025-08-05 08:27:37,297 INFO    MainThread:2657691 [wandb_setup.py:_flush():76] Inferring run settings from compute environment: {'program_relpath': 'experiments/DeepPA/main.py', 'program_abspath': '/home/v-yutongxia/SINPA/experiments/DeepPA/main.py', 'program': './experiments/DeepPA/main.py'}
+2025-08-05 08:27:37,297 INFO    MainThread:2657691 [wandb_setup.py:_flush():76] Applying login settings: {}
+2025-08-05 08:27:37,297 INFO    MainThread:2657691 [wandb_init.py:_log_setup():521] Logging user logs to /home/v-yutongxia/SINPA/wandb/run-20250805_082737-w8bukjzy/logs/debug.log
+2025-08-05 08:27:37,297 INFO    MainThread:2657691 [wandb_init.py:_log_setup():522] Logging internal logs to /home/v-yutongxia/SINPA/wandb/run-20250805_082737-w8bukjzy/logs/debug-internal.log
+2025-08-05 08:27:37,298 INFO    MainThread:2657691 [wandb_init.py:init():561] calling init triggers
+2025-08-05 08:27:37,298 INFO    MainThread:2657691 [wandb_init.py:init():568] wandb.init called with sweep_config: {}
+config: {}
+2025-08-05 08:27:37,298 INFO    MainThread:2657691 [wandb_init.py:init():611] starting backend
+2025-08-05 08:27:37,298 INFO    MainThread:2657691 [wandb_init.py:init():615] setting up manager
+2025-08-05 08:27:37,299 INFO    MainThread:2657691 [backend.py:_multiprocessing_setup():105] multiprocessing start_methods=fork,spawn,forkserver, using: spawn
+2025-08-05 08:27:37,300 INFO    MainThread:2657691 [wandb_init.py:init():623] backend started and connected
+2025-08-05 08:27:37,302 INFO    MainThread:2657691 [wandb_init.py:init():715] updated telemetry
+2025-08-05 08:27:37,343 INFO    MainThread:2657691 [wandb_init.py:init():748] communicating run to backend with 90.0 second timeout
+2025-08-05 08:27:37,629 INFO    MainThread:2657691 [wandb_run.py:_on_init():2357] communicating current version
+2025-08-05 08:27:37,698 INFO    MainThread:2657691 [wandb_run.py:_on_init():2366] got version response upgrade_message: "wandb version 0.21.0 is available!  To upgrade, please run:\n $ pip install wandb --upgrade"
+
+2025-08-05 08:27:37,699 INFO    MainThread:2657691 [wandb_init.py:init():799] starting run threads in backend
+2025-08-05 08:27:39,867 INFO    MainThread:2657691 [wandb_run.py:_console_start():2335] atexit reg
+2025-08-05 08:27:39,867 INFO    MainThread:2657691 [wandb_run.py:_redirect():2190] redirect: wrap_raw
+2025-08-05 08:27:39,867 INFO    MainThread:2657691 [wandb_run.py:_redirect():2255] Wrapping output streams.
+2025-08-05 08:27:39,867 INFO    MainThread:2657691 [wandb_run.py:_redirect():2280] Redirects installed.
+2025-08-05 08:27:39,868 INFO    MainThread:2657691 [wandb_init.py:init():842] run started, returning control to user process

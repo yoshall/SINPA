@@ -91,6 +91,7 @@ class BaseTrainer:
 
         self._logger.info("the number of parameters: {}".format(self.num_param))
         if wandb_flag:
+            wandb.init(project="DeepPA")
             wandb.run.summary["Params"] = self.num_param
 
         self._adj_mat = adj_mat
@@ -119,9 +120,6 @@ class BaseTrainer:
 
         if aug > 0:
             self._sampler = RandomSampler(adj_mat, filter_type)
-
-        self._supports = self._calculate_supports(adj_mat, filter_type)
-        assert self._supports is not None
 
     @property
     def model(self):
@@ -217,13 +215,13 @@ class BaseTrainer:
         return None
 
     def train_batch(self, X, label, iter):
-        if self._aug < 1:
-            new_adj = self._sampler.sample(self._aug)
-            supports = self._calculate_supports(new_adj, self._filter_type)
-        else:
-            supports = self.supports
+        # if self._aug < 1:
+        #     new_adj = self._sampler.sample(self._aug)
+        #     supports = self._calculate_supports(new_adj, self._filter_type)
+        # else:
+        # supports = self.supports
         self.optimizer.zero_grad()
-        pred = self.model(X, supports)
+        pred = self.model(X, self.supports)
         pred, label = self._inverse_transform([pred, label])
 
         loss = self.loss_fn(pred, label, self.nan_val)
@@ -364,7 +362,7 @@ class BaseTrainer:
         print(log.format(metrics[0], metrics[1]))
 
         amae = []
-        aacc = []
+        # aacc = []
         armse = []
 
         for i in range(self.model.horizon):
@@ -410,7 +408,7 @@ class BaseTrainer:
             delimiter=",",
         )
 
-        return amae, armse, aacc
+        # return amae, armse, aacc
 
     def save_preds(self, epoch):
         self.load_model(epoch, self.save_path, self._n_exp)

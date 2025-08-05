@@ -124,9 +124,9 @@ def get_num_nodes(dataset):
     AssertionError: If the dataset is not found in the dictionary.
 
     """
-    d = {"base": 1687, "base_new": 1697, "tiny": 1687}
+    d = {"SINPA": 1687}
     assert dataset in d.keys()
-    return d[dataset]
+    return 1687
 
 
 def get_dataframe(datapath, batch_size, output_dim, mode="train"):

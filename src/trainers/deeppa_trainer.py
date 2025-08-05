@@ -25,14 +25,13 @@ class DeepPA_Trainer(BaseTrainer):
 
     Attributes:
         _optimizer: The optimizer used for training.
-        _supports: List of support matrices calculated based on the adjacency matrix and filter type.
 
     """
 
     def __init__(self, **args):
         super(DeepPA_Trainer, self).__init__(**args)
         self._optimizer = Adam(self.model.parameters(), self._base_lr)
-        self._supports = self._calculate_supports(args["adj_mat"], args["filter_type"])
+        # self._supports = self._calculate_supports(args["adj_mat"], args["filter_type"])
 
     def _calculate_supports(self, adj_mat, filter_type):
         """

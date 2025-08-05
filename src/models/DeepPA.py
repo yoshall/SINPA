@@ -3,8 +3,6 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torch.autograd import Variable
 import sys
-from einops.layers.torch import Rearrange
-from einops import rearrange, repeat
 from src.base.model import BaseModel
 from src.layers.embedding import TimeEmbedding
 import numpy as np
@@ -89,16 +87,6 @@ class DeepPA(BaseModel):
         self.CLUSTER = CLUSTER
         self.GCO_Thre = GCO_Thre
 
-        path_assignment = "data/region/assignment.npy"  # [n, m]
-        path_mask = "data/region/mask.npy"  # [n, n]
-        self.assignment = (
-            torch.from_numpy(np.load(path_assignment)).float().to(self.device)
-        )
-        self.mask = torch.from_numpy(np.load(path_mask)).bool().to(self.device)
-        dist = torch.Tensor(np.load("data/base/dist.npy")).to(self.device)
-        dist_mask = dist > 1
-        self.mask = torch.logical_and(self.mask, dist_mask)
-
         if not self.temporal_flag:
             self.temporal_convs = nn.ModuleList()
         else:
@@ -155,8 +143,6 @@ class DeepPA(BaseModel):
                         heads=n_heads,
                         mlp_dim=n_hidden * mlp_expansion,
                         num_nodes=self.num_nodes,
-                        assignment=self.assignment,
-                        mask=self.mask,
                         dropout=dropout,
                         device=self.device,
                         GCO_Thre=self.GCO_Thre,
@@ -212,7 +198,7 @@ class DeepPA(BaseModel):
         for i in range(self.n_blocks):
             if self.spatial_flag:
                 x, covars = self.s_modules[i](
-                    x, supports[0], semantic, covars
+                    x, supports, semantic, covars
                 )  # [b, c, n, t] [b, c, 1, t]
             else:
                 x = self.spatial_convs[i](x)
@@ -436,13 +422,9 @@ class SpatialTransformer(nn.Module):
         device: Device to be used for computation.
         mlp_dim (int): Dimension of the feedforward network in the model.
         num_nodes (int): Number of nodes in the graph.
-        assignment: Assignment module.
-        mask: Mask module.
         GCO_Thre: Threshold for Graph Convolutional Operator.
         dropout (float, optional): Dropout rate. Defaults to 0.0.
         semantic_dim (int, optional): Dimension of the semantic features. Defaults to 9.
-        covar_dim (int, optional): Dimension of the covariate features. Defaults to 10.
-        cluster (int, optional): Number of clusters. Defaults to 100.
         attn_scale (float, optional): Scaling factor for attention weights. Defaults to 0.01.
     """
 
@@ -458,13 +440,9 @@ class SpatialTransformer(nn.Module):
         device,
         mlp_dim,
         num_nodes,
-        assignment,
-        mask,
         GCO_Thre,
         dropout=0.0,
         semantic_dim=9,
-        covar_dim=10,
-        cluster=100,
         attn_scale=0.01,
     ):
         super().__init__()
@@ -489,7 +467,6 @@ class SpatialTransformer(nn.Module):
             self.pos_embedding = nn.Parameter(torch.randn(num_nodes, dim // 8))
 
         self.layers = nn.ModuleList([])
-        SA_node = num_nodes
         for i in range(depth):
             self.layers.append(
                 nn.ModuleList(
@@ -497,7 +474,7 @@ class SpatialTransformer(nn.Module):
                         GCO_Module(
                             hidden_size=dim,
                             num_blocks=8,
-                            hard_thresholding_fraction=1,
+                            # hard_thresholding_fraction=1,
                             hidden_size_factor=1,
                             GCO_Thre=self.GCO_Thre,
                         ),
@@ -528,8 +505,6 @@ class SpatialTransformer(nn.Module):
             x = x + torch.cat(
                 [self.pos_embedding, self.sematic_to_embedding(semantic)], dim=-1
             )
-            pos_embed = self.pos_embedding
-            sematic_to_embed = self.sematic_to_embedding(semantic)
 
         if self.temporal_encoding:
             x = torch.cat([covars_tmp, x], dim=1)
@@ -538,7 +513,7 @@ class SpatialTransformer(nn.Module):
             n = n
 
         for gco, ff in self.layers:
-            if self.gco:
+            if self.GCO:
                 x = gco(x) + x
             x = ff(x) + x
 

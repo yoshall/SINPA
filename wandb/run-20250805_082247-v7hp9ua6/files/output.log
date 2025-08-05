@@ -1,0 +1,31 @@
+trainer..
+began training..
+2025-08-05 08:22:50,661 - INFO - start training !!!!!
+Traceback (most recent call last):
+  File "./experiments/DeepPA/main.py", line 139, in <module>
+    main()
+  File "./experiments/DeepPA/main.py", line 128, in main
+    trainer.train()
+  File "/home/v-yutongxia/SINPA/src/base/trainer.py", line 255, in train
+    train_losses.append(self.train_batch(X, label, iter))
+  File "/home/v-yutongxia/SINPA/src/base/trainer.py", line 224, in train_batch
+    pred = self.model(X, self.supports)
+  File "/home/v-yutongxia/miniconda3/envs/timedp/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1190, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/v-yutongxia/SINPA/src/models/DeepPA.py", line 203, in forward
+    x, supports[0], semantic, covars
+TypeError: 'NoneType' object is not subscriptable
+Traceback (most recent call last):
+  File "./experiments/DeepPA/main.py", line 139, in <module>
+    main()
+  File "./experiments/DeepPA/main.py", line 128, in main
+    trainer.train()
+  File "/home/v-yutongxia/SINPA/src/base/trainer.py", line 255, in train
+    train_losses.append(self.train_batch(X, label, iter))
+  File "/home/v-yutongxia/SINPA/src/base/trainer.py", line 224, in train_batch
+    pred = self.model(X, self.supports)
+  File "/home/v-yutongxia/miniconda3/envs/timedp/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1190, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/v-yutongxia/SINPA/src/models/DeepPA.py", line 203, in forward
+    x, supports[0], semantic, covars
+TypeError: 'NoneType' object is not subscriptable

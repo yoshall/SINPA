@@ -1,0 +1,175 @@
+{
+    "os": "Linux-6.8.0-1030-azure-x86_64-with-glibc2.10",
+    "python": "3.8.19",
+    "heartbeatAt": "2025-08-05T08:27:37.720932",
+    "startedAt": "2025-08-05T08:27:37.296398",
+    "docker": null,
+    "cuda": null,
+    "args": [
+        "--dataset",
+        "SINPA",
+        "--mode",
+        "train",
+        "--gpu",
+        "0"
+    ],
+    "state": "running",
+    "program": "./experiments/DeepPA/main.py",
+    "codePathLocal": "experiments/DeepPA/main.py",
+    "codePath": "experiments/DeepPA/main.py",
+    "git": {
+        "remote": "git@github.com:yoshall/SINPA.git",
+        "commit": "5c79f1132410a8b722adb327f2fc7dc436e77019"
+    },
+    "email": "xiayutong618@gmail.com",
+    "root": "/home/v-yutongxia/SINPA",
+    "host": "GCRAZGDL1612",
+    "username": "v-yutongxia@microsoft.com",
+    "executable": "/home/v-yutongxia/miniconda3/envs/timedp/bin/python",
+    "cpu_count": 24,
+    "cpu_count_logical": 24,
+    "cpu_freq": {
+        "current": 2669.331416666667,
+        "min": 0.0,
+        "max": 0.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 2445.443,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2445.443,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2445.443,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 3148.717,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2810.567,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2446.042,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2376.918,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2445.443,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2445.443,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2445.443,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2445.443,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2445.443,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 3067.201,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2445.443,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 3077.921,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2445.443,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2445.443,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2445.443,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2797.356,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 3086.599,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 3092.1,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 3100.415,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 3100.21,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2445.443,
+            "min": 0.0,
+            "max": 0.0
+        }
+    ],
+    "disk": {
+        "/": {
+            "total": 992.2479553222656,
+            "used": 156.88035202026367
+        }
+    },
+    "gpu": "NVIDIA A100 80GB PCIe",
+    "gpu_count": 1,
+    "gpu_devices": [
+        {
+            "name": "NVIDIA A100 80GB PCIe",
+            "memory_total": 85899345920
+        }
+    ],
+    "memory": {
+        "total": 216.26214981079102
+    }
+}

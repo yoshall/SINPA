@@ -7,6 +7,8 @@ import yaml
 import pickle
 import scipy.sparse as sp
 from scipy.sparse import linalg
+import sys
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
 
 import torch.nn as nn
 import torch
@@ -64,7 +66,6 @@ def get_config():
     args.num_nodes = get_num_nodes(args.dataset)
 
     args.datapath = os.path.join("./data", args.dataset)
-    args.graph_pkl = "data/sensor_graph/adj_mx_{}.pkl".format(args.dataset.lower())
     if args.seed != 0:
         torch.manual_seed(args.seed)
     os.environ["CUDA_VISIBLE_DEVICES"] = str(args.gpu)
@@ -75,7 +76,6 @@ def main():
     args, fname = get_config()
 
     device = check_device()
-    _, _, adj_mat = load_graph_data(args.graph_pkl)
 
     model = DeepPA(
         dropout=args.dropout,
@@ -99,14 +99,15 @@ def main():
         output_dim=args.output_dim,
         GCO_Thre=args.GCO_Thre,
     )
-    print("model created..")
+    print("Model created.")
 
+    print("Loading dataloader. This may take a while...")
     data = get_dataloader(args.datapath, args.batch_size, args.output_dim)
-    print("get dataloader..")
+    
 
     trainer = DeepPA_Trainer(
         model=model,
-        adj_mat=adj_mat,
+        adj_mat=None,
         filter_type=args.filter_type,
         data=data,
         aug=args.aug,

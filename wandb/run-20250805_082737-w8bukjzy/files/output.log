@@ -1,0 +1,33 @@
+trainer..
+began training..
+2025-08-05 08:27:39,870 - INFO - start training !!!!!
+/home/v-yutongxia/miniconda3/envs/timedp/lib/python3.8/site-packages/torch/optim/lr_scheduler.py:138: UserWarning: Detected call of `lr_scheduler.step()` before `optimizer.step()`. In PyTorch 1.1.0 and later, you should call them in the opposite order: `optimizer.step()` before `lr_scheduler.step()`.  Failure to do this will result in PyTorch skipping the first value of the learning rate schedule. See more details at https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate
+  warnings.warn("Detected call of `lr_scheduler.step()` before `optimizer.step()`. "
+2025-08-05 08:30:38,081 - INFO - epoch complete
+2025-08-05 08:30:38,081 - INFO - evaluating now!
+2025-08-05 08:30:40,903 - INFO - Epoch [0/100] (1521) train_mae: 20.3011, val_mae: 16.4164, lr: 0.001000, 178.2s
+2025-08-05 08:30:40,910 - INFO - Val loss decrease from inf to 16.4164, saving to True
+2025-08-05 08:33:38,218 - INFO - epoch complete
+2025-08-05 08:33:38,218 - INFO - evaluating now!
+2025-08-05 08:33:41,047 - INFO - Epoch [1/100] (3042) train_mae: 16.4330, val_mae: 14.7799, lr: 0.001000, 177.3s
+2025-08-05 08:33:41,053 - INFO - Val loss decrease from 16.4164 to 14.7799, saving to True
+2025-08-05 08:36:38,386 - INFO - epoch complete
+2025-08-05 08:36:38,386 - INFO - evaluating now!
+2025-08-05 08:36:41,216 - INFO - Epoch [2/100] (4563) train_mae: 14.8424, val_mae: 13.3874, lr: 0.001000, 177.3s
+2025-08-05 08:36:41,223 - INFO - Val loss decrease from 14.7799 to 13.3874, saving to True
+2025-08-05 08:39:38,635 - INFO - epoch complete
+2025-08-05 08:39:38,636 - INFO - evaluating now!
+2025-08-05 08:39:41,463 - INFO - Epoch [3/100] (6084) train_mae: 13.8931, val_mae: 13.0935, lr: 0.001000, 177.4s
+2025-08-05 08:39:41,469 - INFO - Val loss decrease from 13.3874 to 13.0935, saving to True
+2025-08-05 08:42:38,961 - INFO - epoch complete
+2025-08-05 08:42:38,962 - INFO - evaluating now!
+2025-08-05 08:42:41,786 - INFO - Epoch [4/100] (7605) train_mae: 13.3293, val_mae: 13.5869, lr: 0.001000, 177.5s
+2025-08-05 08:45:38,910 - INFO - epoch complete
+2025-08-05 08:45:38,911 - INFO - evaluating now!
+2025-08-05 08:45:41,740 - INFO - Epoch [5/100] (9126) train_mae: 12.9614, val_mae: 12.5229, lr: 0.001000, 177.1s
+2025-08-05 08:45:41,747 - INFO - Val loss decrease from 13.0935 to 12.5229, saving to True
+2025-08-05 08:48:38,673 - INFO - epoch complete
+2025-08-05 08:48:38,673 - INFO - evaluating now!
+2025-08-05 08:48:41,501 - INFO - Epoch [6/100] (10647) train_mae: 12.7472, val_mae: 12.8378, lr: 0.001000, 176.9s
+2025-08-05 08:51:38,488 - INFO - epoch complete
+2025-08-05 08:51:38,488 - INFO - evaluating now!

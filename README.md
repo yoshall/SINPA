@@ -1,27 +1,32 @@
 # SINPA
-This repo is the implementation of our IJCAI 2024 paper (AI for Social Good Track) entitled [Predicting Carpark Availability in Singapore with Cross-Domain Data: A New Dataset and A Data-Driven Approach](https://arxiv.org/pdf/2405.18910).
-In this study, we crawl, process, and release the <b>SINPA</b> dataset, a large-scale parking availability dataset incorporating cross-domain data in Singapore. We then propose a novel deep-learning framework <b>DeepPA</b> to collectively forecast future PA readings across Singapore. 
 
+This repo is the implementation of our IJCAI 2024 paper (AI for Social Good Track) entitled [Predicting Carpark Availability in Singapore with Cross-Domain Data: A New Dataset and A Data-Driven Approach](https://arxiv.org/pdf/2405.18910).
+In this study, we crawl, process, and release the <b>SINPA</b> dataset, a large-scale parking availability dataset incorporating cross-domain data in Singapore. We then propose a novel deep-learning framework <b>DeepPA</b> to collectively forecast future PA readings across Singapore.
 
 ## Framework
+
 <img src="img/intro and model.png" width="1000px">
 
 Figure (a) Distribution of 1,687 carparks throughout Singapore. (b) The framework of DeepPA.
 
 ## Dataset
-In this section, we will outline the procedure for downloading the SINPA dataset, followed by a detailed description of the dataset. 
+
+In this section, we will outline the procedure for downloading the SINPA dataset, followed by a detailed description of the dataset.
+
 - **Dataset Download**. We provide the dataset on: [https://huggingface.co/datasets/Huaiwu/SINPA/tree/main](https://huggingface.co/datasets/Huaiwu/SINPA/tree/main). There are three files in the `./data` folder:
-  ```
-    ├── data
-    │   ├── train.npz
-    │   ├── val.npz
-    │   ├── test.npz
-  ```
-    `train.npz`, `val.npz` and `test.npz` include training (12167 samples), validation(1217 samples), and test (1216 samples) set respectively. 
-    To download the data, you can download all data from the provided [link](https://huggingface.co/datasets/Huaiwu/SINPA). You can download each file by clicking on its download button.
 
+  ```
+
+  data
+    ├── train.npz
+    ├── val.npz
+    └── test.npz
+
+  ```
+
+  `train.npz`, `val.npz` and `test.npz` include training (12167 samples), validation(1217 samples), and test (1216 samples) set respectively.
+  To download the data, you can download all data from the provided [link](https://huggingface.co/datasets/Huaiwu/SINPA). You can download each file by clicking on its download button.
 - **Dataset Description**. We crawled over three-year real-time PA data every 5 minutes from 1,921 parking lots throughout Singapore from [Data.gov.sg](https://data.gov.sg/). To mitigate the impact of missing values, we re-sampled the raw dataset into the 15-minute interval and chose lots with a missing rate of PA of less than 30%. In addition, due to the temporal distribution shift, we only use one-year data (2020/07/01 to 2021/06/30), and the ratio of training: validation: testing sets is set as 10:1:1. We then remove parking lots with obvious distribution shift (i.e., high KL divergence). After sample filtering, it remains 1,687 parking lots with stationary data distributions. We also crawl external attributes for these lots, including meteorological data (i.e., temperature, humidity, and wind speed), panning areas, utilization type, and road networks data from [Data.gov.sg](https://data.gov.sg/), the [Urban Redevelopment Authority (URA)](https://www.ura.gov.sg/) and the [Land Transport Authority (LTA)](https://datamall.lta.gov.sg/content/datamall/en.html) respectively. A detailed description of the dataset can be found in the following table.
-
 
   <table>
   <capital></capital>
@@ -98,18 +103,92 @@ In this section, we will outline the procedure for downloading the SINPA dataset
   <td >Normalized value</td>
   </tr>
   </table>
-  
-  Note: _Normalized_ refers to Z-score normalization, which is applied for fast convergence.
 
+  Note: _Normalized_ refers to Z-score normalization, which is applied for fast convergence.
 - **Auxiliary Data**. If you would like to visualize the parking lots or customize the adjacency matrix, you can access the parking lot locations in the file `aux_data/lots_location.csv`.
 
-## Requirements
-DeepPA uses the following dependencies:
-1. Pytorch 1.10 and its dependencies
-2. Numpy and Scipy
-3. CUDA 11.3 or latest version, cuDNN.
+## Step-by-Step Setup Guide
+
+### Clone the Repository
+
+```bash
+git clone git@github.com:yoshall/SINPA.git
+cd SINPA
+```
+
+### Create and Activate a New Environment
+
+```bash
+conda create -n sinpa python=3.9 -y
+conda activate sinpa
+```
+
+### Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### Prepare the Dataset
+
+Put the dataset you have download from [huggingface](https://huggingface.co/datasets/Huaiwu/SINPA/tree/main) is placed in the following structure:
+
+```bash
+📂 data
+└── 📁 SINPA
+    ├── 📄 train.npz
+    ├── 📄 val.npz
+    └── 📄 test.npz
+```
+
+### (Optional) Weights & Biases
+
+If you want to enable [Weights & Biases]() logging:
+
+```bash
+wandb login
+```
+
+### Model Training
+
+The following examples are conducted on the base dataset of SINPA:
+
+* Example 1 (DeepPA with default setting):
+
+```
+python ./experiments/DeepPA/main.py --dataset SINPA --mode train --gpu 0
+```
+
+* Example 2 (DeepPA without GCO):
+
+```
+python ./experiments/DeepPA/main.py --dataset SINPA --mode train --gpu 0 --GCO False
+```
+
+* Example 2 (DeepPA with the 0.7 proportion of low frequency signals):
+
+```
+python ./experiments/DeepPA/main.py --dataset SINPA --mode train --gpu 0 --GCO_Thre 0.7
+```
+
+### Model Evaluation
+
+To test the above-trained models, you can use the following command:
+
+* Example 1 (DeepPA with default setting):
+
+```
+python ./experiments/DeepPA/main.py --dataset SINPA --mode test --gpu 0
+```
+
+* Example 2 (DeepPA with the 0.7 proportion of low frequency signals):
+
+```
+python ./experiments/DeepPA/main.py --dataset SINPA --mode test --gpu 0 --GCO_Thre 0.7
+```
 
 ## Folder Structure
+
 We list the code of the major modules as follows:
 
 1. The main function to train/test our model:  [click here.](experiments/DeepPA/main.py "1")
@@ -119,9 +198,11 @@ We list the code of the major modules as follows:
 5. Computations: [click here.](src/utils "5")
 
 ## Arguments
+
 We introduce some major arguments of our main function here.
 
 Training settings:
+
 - mode: indicating the mode (train or test).
 - n_exp: experimental group number.
 - gpu: which gpu used to train.
@@ -138,6 +219,7 @@ Training settings:
 - wandb: whether to use wandb.
 
 Model hyperparameters:
+
 - dropout: dropout rate.
 - n_blocks: number of layers of SLBlock and TLBlock.
 - n_hidden: hidden dimensions in SLBlock and TLBlock.
@@ -152,42 +234,14 @@ Model hyperparameters:
 - base_lr: base learning rate.
 - lr_decay_ratio: learning rate decay ratio.
 
-## Model training
-The following examples are conducted on the base dataset of SINPA:
-
-* Example 1 (DeepPA with default setting):
-```
-python ./experiments/DeepPA/main.py --dataset /base/ --mode train --gpu 0
-```
-
-* Example 2 (DeepPA without GCO):
-```
-python ./experiments/DeepPA/main.py --dataset /base/ --mode train --gpu 0 --GCO False
-```
-
-* Example 2 (DeepPA with the 0.7 proportion of low frequency signals):
-```
-python ./experiments/DeepPA/main.py --dataset /base/ --mode train --gpu 0 --GCO_Thre 0.7
-```
-
-## Model Evaluation
-To test the above-trained models, you can use the following command:
-
-* Example 1 (DeepPA with default setting):
-```
-python ./experiments/DeepPA/main.py --dataset /base/ --mode test --gpu 0
-```
-
-* Example 2 (DeepPA with the 0.7 proportion of low frequency signals):
-```
-python ./experiments/DeepPA/main.py --dataset /base/ --mode test --gpu 0 --GCO_Thre 0.7
-```
-
 ## License
+
 The <b>SINPA</b> dataset is released under the Singapore Open Data Licence: [https://beta.data.gov.sg/open-data-license](https://beta.data.gov.sg/open-data-license).
 
 ## Citation
+
 If you find our work useful in your research, please cite:
+
 ```
 @inproceedings{zhang2024predicting,
   title={Predicting Parking Availability in Singapore with Cross-Domain Data: A New Dataset and A Data-Driven Approach},
