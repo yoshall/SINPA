@@ -16,12 +16,10 @@ In this section, we will outline the procedure for downloading the SINPA dataset
 - **Dataset Download**. We provide the dataset on: [https://huggingface.co/datasets/Huaiwu/SINPA/tree/main](https://huggingface.co/datasets/Huaiwu/SINPA/tree/main). There are three files in the `./data` folder:
 
   ```
-
   data
     ├── train.npz
     ├── val.npz
     └── test.npz
-
   ```
 
   `train.npz`, `val.npz` and `test.npz` include training (12167 samples), validation(1217 samples), and test (1216 samples) set respectively.
@@ -109,27 +107,27 @@ In this section, we will outline the procedure for downloading the SINPA dataset
 
 ## Step-by-Step Setup Guide
 
-### Clone the Repository
+### 1. Clone the Repository
 
 ```bash
 git clone git@github.com:yoshall/SINPA.git
 cd SINPA
 ```
 
-### Create and Activate a New Environment
+### 2. Create and Activate a New Environment
 
 ```bash
 conda create -n sinpa python=3.9 -y
 conda activate sinpa
 ```
 
-### Install Dependencies
+### 3. Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### Prepare the Dataset
+### 4. Prepare the Dataset
 
 Put the dataset you have download from [huggingface](https://huggingface.co/datasets/Huaiwu/SINPA/tree/main) is placed in the following structure:
 
@@ -141,7 +139,7 @@ Put the dataset you have download from [huggingface](https://huggingface.co/data
     └── 📄 test.npz
 ```
 
-### (Optional) Weights & Biases
+### 5. (Optional) Weights & Biases
 
 If you want to enable [Weights & Biases]() logging:
 
@@ -149,7 +147,7 @@ If you want to enable [Weights & Biases]() logging:
 wandb login
 ```
 
-### Model Training
+### 6. Model Training
 
 The following examples are conducted on the base dataset of SINPA:
 
@@ -171,7 +169,7 @@ python ./experiments/DeepPA/main.py --dataset SINPA --mode train --gpu 0 --GCO F
 python ./experiments/DeepPA/main.py --dataset SINPA --mode train --gpu 0 --GCO_Thre 0.7
 ```
 
-### Model Evaluation
+### 7. Model Evaluation
 
 To test the above-trained models, you can use the following command:
 
